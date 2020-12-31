@@ -30,6 +30,7 @@
 			success: function (response) {
 				
 				 alert (response);
+				 window.location.replace("transactions.php");
 			},
 			error: function (request, error) {
 				console.log(arguments);

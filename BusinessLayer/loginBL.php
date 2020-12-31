@@ -2,7 +2,9 @@
 include 'connection.php'; 
 session_start();
     
-
+$operations = $_GET["function"]; 
+if ($operations == "function")
+{ 
 
     $loginData = $_POST['userData'];
         
@@ -25,13 +27,23 @@ session_start();
         $_SESSION['maritalstatus']= $row['marital_Status'];
         $_SESSION['password'] = $row['password'];
        
-		echo "Welcome ".$_SESSION['name']." you have successfully logged in.";
+        echo "Welcome ".$_SESSION['name']." you have successfully logged in.";
+        
     }
     else if(  $email !=  $_SESSION['email'] ){
 echo "This email ID does not exist!";
 
 }else if ( $password !=   $_SESSION['password']){
     echo "The password is incorrect.";
+}
+}
+else if (($operations == "logoutfunc"))
+ {
+
+    session_destroy();
+    echo "You have successfully logged out.";
+
+
 }
 $conn->close();
     ?>

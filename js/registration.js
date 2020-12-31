@@ -71,8 +71,9 @@
 			//  contentType: false,
 			 
 			success: function (response) {
-				RefreshTable(response);
-				 alert ("Transaction created successfully");
+				//RefreshTable(response);
+				 alert (response);
+				 window.location.replace("Login.php");
 			},
 			error: function (request, error) {
 				console.log(arguments);
@@ -81,6 +82,7 @@
 			
 			  });
 			}
+			window.location.replace("Login.php");
 		}
 		$(document).ready(function(){
 
