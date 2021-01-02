@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'connection.php'; 
 $operations = $_GET["function"];     
 if ($operations == "readfunc")
@@ -20,8 +21,8 @@ $amountdb = $decoded['amount'];
 $categorydb = $decoded['category'];
 $datedb = $decoded['date'];
  
-$insertsql = "INSERT INTO transactions (name,Amount,category,Date,created_by,created_on,updated_by,updated_on)
-VALUES ('$namedb' ,$amountdb,'$categorydb','$datedb','$createdBy','$date','$updatedBy','$date')";
+$insertsql = "INSERT INTO transactions (id,name,Amount,category,Date,created_by,created_on,updated_by,updated_on)
+VALUES ( '".$_SESSION['id']."','$namedb' ,$amountdb,'$categorydb','$datedb','".$_SESSION['id']."','$date', '".$_SESSION['id']."','$date')";
 
  
  if ($conn->query($insertsql) === TRUE) {
@@ -86,6 +87,8 @@ VALUES ('$namedb' ,$amountdb,'$categorydb','$datedb','$createdBy','$date','$upda
         $return_arr = Array();
      $sql = "SELECT * FROM transactions
      ORDER BY id DESC;";
+
+
      $result = $conn->query($sql);
           
             while($row = mysqli_fetch_array($result) ){

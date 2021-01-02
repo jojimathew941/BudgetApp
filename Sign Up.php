@@ -20,7 +20,7 @@
 </head>
 <body>
 
-<?php include 'header.php';?>
+<div style = "text-align:center;"><h1 style = "color:white;">BudgetApp</h1></div>
 
 <div class= "container box ">
  <form class= "formpad " >

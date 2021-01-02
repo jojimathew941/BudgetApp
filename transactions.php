@@ -25,12 +25,29 @@
    <div class="container-fluid table-responsive">
   <div class = "row">
 
-   <div class="col"> <h1>TRANSACTIONS</h1></div>
-	<div class="col"></div>
-	<div class="col"></div>
-	<div class="col"></div>
-	<div class="col"></div>
-	 <div class="col align-self-end"><h1> <button type="button" class="btn btn-dark "data-toggle="modal"data-target="#myModal" onclick = "hidebuttonFunction()">ADD</button></div>
+   <div class="col-sm-4"> <h1>TRANSACTIONS</h1></div>
+   
+<!-- 
+   <div class="col-sm-2 box"> 
+   <form class="form-inline">
+   <label for="name" style = "color:white;">Budget</label> 
+
+   
+    <input  id = "budgetamount" class = "form-control"type="text"/> 
+    
+    <form>
+    </div> -->
+   <div class="col-sm-4"> <h2>Available budget:<span id ="budgetamount" class="badge badge-secondary">5000</span></h2></div>
+
+
+
+   
+   
+   
+  
+
+
+	 <div class="col-sm-4 d-flex justify-content-end"> <button type="button" class="btn btn-dark "data-toggle="modal"data-target="#myModal" onclick = "hidebuttonFunction()">ADD</button></div>
    
     </div>
 	<!-- The Modal -->
@@ -74,10 +91,16 @@
                        <div class = "col-sm-3">  <label for="category">category</label> </div>
                         
                         <div class = "col-sm-7">  <select  id = "category" class = "form-control" id="category" name="category">
-    <option value="volvo">Volvo</option>
-    <option value="saab">Saab</option>
-    <option value="fiat">Fiat</option>
-    <option value="audi">Audi</option>
+    <option value="Housing">Housing</option>
+    <option value="food">food</option>
+    <option value="Childcare">Child care</option>
+    <option value="Debt">Debt</option>
+    <option value="Health care">Health care</option>
+    <option value="Transportation">Transportation</option>
+    <option value="Personal care">Personal care</option>
+    <option value="Pet care">Pet care</option>
+    <option value="Entertainment">Entertainment</option>
+    <option value="Miscellaneous">Miscellaneous</option>
   </select></div>
                   </div>  
                     
@@ -97,6 +120,7 @@
     </div>
   </div>
 </div>
+
 
  
  

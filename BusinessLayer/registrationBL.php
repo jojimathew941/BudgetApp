@@ -19,13 +19,13 @@ if ($operations == "insertFunc")
     $maritaldb = $decoded['maritalStatus'];
 
      
-    $insertsql = "INSERT INTO users (Name,d_o_b,age,sex,email,mobile,password,module,marital_status,created_by,created_on,updated_by,updated_on)
+    $insertsql= "INSERT INTO users (Name,d_o_b,age,sex,email,mobile,password,module,marital_status,created_by,created_on,updated_by,updated_on)
     VALUES ('$namedb' ,'$DOBdb','$agedb','$sexdb','$emaildb',$mobiledb,'$passworddb','$checkboxvaluesdb','$maritaldb','$createdBy','$date','$updatedBy','$date')";
     
      
      if ($conn->query($insertsql) === TRUE) {
        echo "New record created successfully";
-      //echo json_encode(ReadTransactions());
+      //echo json_encode(ReadTransactions());bbbbbbbbb
       } else {
         echo "Error: " . $insertsql . "<br>" . $conn->error;
       }

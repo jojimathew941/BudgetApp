@@ -2,7 +2,7 @@
   
   .table-bordered > tbody > tr > td,.table-bordered > tbody > tr > th,.table-bordered > thead> tr > td,.table-bordered > thead > tr > th {
 	  
-	   border: 2px solid grey;
+	    border: 2px solid grey; 
   }
   
   .colpad {
@@ -23,7 +23,7 @@
   }
 
   /* only used for background overlay not needed for centering */
-form:before {
+/* form:before {
     content: '';
     height: 100%;
     left: 0;
@@ -33,6 +33,17 @@ form:before {
     background-color: rgba(0,0,0,0.3);
     z-index: -1;
     border-radius: 10px;
+} */
+.box{
+	
+  
+  border: 1px solid grey;
+ background-color: #343a40; 
+ border-radius: 5px;
+
+ 
+ 
+ 
 }
 
 footer {
@@ -56,6 +67,12 @@ footer {
   padding-bottom:10px;
 }
 
+.fa-cog {
+  color:white;
+}
+.icon-cog {
+  color:white;
+}
 
   
   
