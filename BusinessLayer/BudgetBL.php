@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include 'connection.php';
 $availableDummyAmount = 100000;
 $operations = $_GET["function"];     
@@ -25,7 +25,7 @@ if ($operations == "readfunc")
             $available__amount = $availableDummyAmount;
              
             $insertsql = "INSERT INTO budget (Name,amount,available_amount,month,year,created_by,created_on,updated_by,updated_on)
-            VALUES ('$namedb' ,$amountdb, $available__amount,'$monthdb',' $yeardb','$createdBy','$date','$updatedBy','$date')";
+            VALUES ('$namedb' ,$amountdb, $available__amount,'$monthdb',' $yeardb','".$_SESSION['id']."','$date','".$_SESSION['id']."','$date')";
             
              
              if ($conn->query($insertsql) === TRUE) {
@@ -90,7 +90,8 @@ if ($operations == "readfunc")
     {
           global $conn;
           $return_arr = Array();
-       $sql = "select * from budget ORDER BY id DESC;";
+       $sql = "select * from budget where created_by = '".$_SESSION['id']."'
+        ORDER BY id DESC;";
        $result = $conn->query($sql);
             
               while($row = mysqli_fetch_array($result) ){

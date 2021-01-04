@@ -21,8 +21,8 @@ $amountdb = $decoded['amount'];
 $categorydb = $decoded['category'];
 $datedb = $decoded['date'];
  
-$insertsql = "INSERT INTO transactions (id,name,Amount,category,Date,created_by,created_on,updated_by,updated_on)
-VALUES ( '".$_SESSION['id']."','$namedb' ,$amountdb,'$categorydb','$datedb','".$_SESSION['id']."','$date', '".$_SESSION['id']."','$date')";
+$insertsql = "INSERT INTO transactions (name,Amount,category,Date,created_by,created_on,updated_by,updated_on)
+VALUES ( '$namedb' ,$amountdb,'$categorydb','$datedb','".$_SESSION['id']."','$date', '".$_SESSION['id']."','$date')";
 
  
  if ($conn->query($insertsql) === TRUE) {
@@ -85,7 +85,9 @@ VALUES ( '".$_SESSION['id']."','$namedb' ,$amountdb,'$categorydb','$datedb','".$
   {
         global $conn;
         $return_arr = Array();
-     $sql = "SELECT * FROM transactions
+        $date = date("Y/m");
+
+     $sql = "SELECT * FROM transactions where created_by = '".$_SESSION['id']."'and created_on like  '$date%'
      ORDER BY id DESC;";
 
 
