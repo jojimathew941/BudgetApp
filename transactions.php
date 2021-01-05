@@ -25,7 +25,7 @@
    <div class="container-fluid table-responsive">
   <div class = "row">
 
-   <div class="col-sm-4"> <h1>TRANSACTIONS</h1></div>
+   <div class="col-sm-3"> <h1>TRANSACTIONS</h1></div>
    
 <!-- 
    <div class="col-sm-2 box"> 
@@ -37,9 +37,10 @@
     
     <form>
     </div> -->
-   <div class="col-sm-4"> <h2>Available budget:<span id ="budgetamount" class="badge badge-secondary">5000</span></h2></div>
+   <div class="col-sm-3"> <h4>Total budget: <span id ="totalamount" class="badge badge-secondary">5000</span></h4></div>
+   <div class="col-sm-3"> <h4>Available budget: <span id ="budgetamount" class="badge badge-secondary">5000</span></h4></div>
 
-
+   
 
    
    
@@ -47,7 +48,7 @@
   
 
 
-	 <div class="col-sm-4 d-flex justify-content-end"> <button type="button" class="btn btn-dark "data-toggle="modal"data-target="#myModal" onclick = "hidebuttonFunction()">ADD</button></div>
+	 <div class="col-sm-3 d-flex justify-content-end"> <button type="button" class="btn btn-dark "data-toggle="modal"data-target="#myModal" onclick = "hidebuttonFunction()">ADD</button></div>
    
     </div>
 	<!-- The Modal -->

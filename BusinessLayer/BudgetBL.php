@@ -1,7 +1,7 @@
 <?php
 session_start();
 include 'connection.php';
-$availableDummyAmount = 100000;
+$available__amount = 100000;
 $operations = $_GET["function"];     
 if ($operations == "readfunc")
 { 
@@ -12,7 +12,11 @@ if ($operations == "readfunc")
 
         else if($operations == "insertFunc")
         {
-    
+         
+
+
+
+
     
             $FormDat = $_POST['budgetData'];
             
@@ -22,7 +26,7 @@ if ($operations == "readfunc")
             $amountdb = $decoded['amount'];
             $monthdb = $decoded['month'];
             $yeardb = $decoded['year'];
-            $available__amount = $availableDummyAmount;
+            
              
             $insertsql = "INSERT INTO budget (Name,amount,available_amount,month,year,created_by,created_on,updated_by,updated_on)
             VALUES ('$namedb' ,$amountdb, $available__amount,'$monthdb',' $yeardb','".$_SESSION['id']."','$date','".$_SESSION['id']."','$date')";
@@ -35,7 +39,8 @@ if ($operations == "readfunc")
                 echo "Error: " . $insertsql . "<br>" . $conn->error;
               }
             
-                  }
+            }
+          
 
                   else if($operations == "updatefunc")
                   {
@@ -89,6 +94,7 @@ if ($operations == "readfunc")
                   function ReadTransactions()
     {
           global $conn;
+          $date = date("Y/m");
           $return_arr = Array();
        $sql = "select * from budget where created_by = '".$_SESSION['id']."'
         ORDER BY id DESC;";

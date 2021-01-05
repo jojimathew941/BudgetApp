@@ -1,6 +1,8 @@
 <?php
 session_start();
 include 'connection.php'; 
+$available_amount;
+$budget_amount;
 $operations = $_GET["function"];     
 if ($operations == "readfunc")
 { 
@@ -10,7 +12,6 @@ if ($operations == "readfunc")
     else if($operations == "insertFunc")
     {
     
-   
 
 $FormDat = $_POST['transactionData'];
         
@@ -29,10 +30,46 @@ VALUES ( '$namedb' ,$amountdb,'$categorydb','$datedb','".$_SESSION['id']."','$da
   // echo "New record created successfully";
   echo json_encode(ReadTransactions());
   } else {
-	echo "Error: " . $insertsql . "<br>" . $conn->error;
+  echo "Error: " . $insertsql . "<br>" . $conn->error;
+  
+
   }
 
-      }
+
+  $amount_array = Array();
+      $date = date("Y/m");
+      $sql = "SELECT sum(amount) FROM transactions where created_by = '".$_SESSION['id']."'and created_on like  '$date%'
+      ORDER BY id DESC;";
+
+$result = $conn->query($sql);
+// while($row = mysqli_fetch_array($result) ){
+// $amount = $row['amount'];
+// array_push(  $amount_array,$amount);
+   
+
+//       }
+//       $sum_of_transactions = array_sum($amount_array);
+
+       $sql2 = "SELECT * FROM budget where created_by = '".$_SESSION['id']."' and created_on like  '$date%'
+       ORDER BY id DESC;";
+$budget_amountsql = $conn->query($sql2);
+
+ if( $row = mysqli_fetch_array($budget_amountsql)){
+
+  $budget_amount = $row['amount'];
+ }
+
+ $available_amount = $budget_amount - $result ;
+ 
+$update_availableamount_sql = "UPDATE budget SET available_amount =$available_amount";
+if ($conn->query($update_availableamount_sql) === TRUE) {
+  // echo "New record created successfully";
+  //echo json_encode(ReadTransactions());
+  } else {
+  echo "Error: " . $update_availableamount_sql . "<br>" . $conn->error;
+  }
+
+    }
       else if($operations == "updatefunc")
       {
 
@@ -77,15 +114,27 @@ VALUES ( '$namedb' ,$amountdb,'$categorydb','$datedb','".$_SESSION['id']."','$da
           } else {
           echo "Error: " . $deletesql . "<br>" . $conn->error;
           }
+        }
 
-      }
-      
  
   function ReadTransactions()
   {
         global $conn;
         $return_arr = Array();
         $date = date("Y/m");
+        
+
+
+        $sql3= "SELECT * FROM budget where created_by = '".$_SESSION['id']."' and created_on like  '$date%'
+               ORDER BY id DESC;";
+        $budget_sql = $conn->query($sql3);
+        
+                if( $row1 = mysqli_fetch_array($budget_sql)){
+        
+             $budgetAmount =   $row1['amount'];
+             $budgetAvailableAmount=$row1['available_amount'];
+                  
+                  }
 
      $sql = "SELECT * FROM transactions where created_by = '".$_SESSION['id']."'and created_on like  '$date%'
      ORDER BY id DESC;";
@@ -111,8 +160,11 @@ VALUES ( '$namedb' ,$amountdb,'$categorydb','$datedb','".$_SESSION['id']."','$da
                                 "Date" => $Date_s,
                                 "created_by" => $createdby,
                                 "created_on" => $createdon,
+                                "budgetAmount"=>  $budgetAmount,
+                            "budgetAvailableAmount" => $budgetAvailableAmount,
                                 "updated_by" =>  $updatedby,
                                 "updated_on" =>  $updatedon);
+
     
                             
                             
@@ -125,10 +177,4 @@ VALUES ( '$namedb' ,$amountdb,'$categorydb','$datedb','".$_SESSION['id']."','$da
   
 $conn->close();
     ?>
-
-
-
-
-
-
- 
+    

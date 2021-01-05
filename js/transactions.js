@@ -6,7 +6,9 @@ $(document).ready(function(){
 		type: 'get',
         dataType: 'JSON',
         success: function(response){
-            RefreshTable(response);
+			RefreshTable(response);
+			document.getElementById("budgetamount").innerHTML = response[0].budgetAvailableAmount;
+			document.getElementById("totalamount").innerHTML = response[0].budgetAmount;
 			},		
 		error: function (request, error) {
 			console.log(arguments);
@@ -14,10 +16,12 @@ $(document).ready(function(){
 		}
 		
 		  });
+
+			
+			  });
 			  
 
-        
-	});
+  
 
 
   function insertData()
