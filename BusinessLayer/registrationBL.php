@@ -18,6 +18,24 @@ if ($operations == "insertFunc")
     $sexdb = $decoded['sex'];
     $maritaldb = $decoded['maritalStatus'];
 
+    $email_validationSql = "SELECT * FROM users where email = '$emaildb' ";
+    //if ($conn->query($email_validationSql) === TRUE) {
+      $emaildb_result = $conn->query($email_validationSql);
+     
+    //  } else {
+    //    echo "Error: " . $email_validationSql . "<br>" . $conn->error;
+    //  }
+   
+
+   
+
+
+    if( $emaildb_result->num_rows > 0){
+
+
+echo  "fail";
+    }else {
+
      
     $insertsql= "INSERT INTO users (Name,d_o_b,age,sex,email,mobile,password,module,marital_status,created_by,created_on,updated_by,updated_on)
     VALUES ('$namedb' ,'$DOBdb','$agedb','$sexdb','$emaildb',$mobiledb,'$passworddb','$checkboxvaluesdb','$maritaldb','$createdBy','$date','$updatedBy','$date')";
@@ -25,13 +43,14 @@ if ($operations == "insertFunc")
      
      if ($conn->query($insertsql) === TRUE) {
        echo "New record created successfully";
-      //echo json_encode(ReadTransactions());bbbbbbbbb
+      //echo json_encode(ReadTransactions());
       } else {
         echo "Error: " . $insertsql . "<br>" . $conn->error;
       }
     
 
 
+}
 }
 else if ($operations == "readfunc")
 { 

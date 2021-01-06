@@ -28,75 +28,14 @@ VALUES ( '$namedb' ,$amountdb,'$categorydb','$datedb','".$_SESSION['id']."','$da
  
  if ($conn->query($insertsql) === TRUE) {
   // echo "New record created successfully";
-  echo json_encode(ReadTransactions());
-  } else {
-  echo "Error: " . $insertsql . "<br>" . $conn->error;
-  
-
-  }
-
-
-  $amount_array = Array();
-      $date = date("Y/m");
-      $sql = "SELECT sum(amount) FROM transactions where created_by = '".$_SESSION['id']."'and created_on like  '$date%'
-      ORDER BY id DESC;";
-
-$result = $conn->query($sql);
-// while($row = mysqli_fetch_array($result) ){
-// $amount = $row['amount'];
-// array_push(  $amount_array,$amount);
-   
-
-//       }
-//       $sum_of_transactions = array_sum($amount_array);
-
-       $sql2 = "SELECT * FROM budget where created_by = '".$_SESSION['id']."' and created_on like  '$date%'
-       ORDER BY id DESC;";
-$budget_amountsql = $conn->query($sql2);
-
- if( $row = mysqli_fetch_array($budget_amountsql)){
-
-  $budget_amount = $row['amount'];
- }
-
- $available_amount = $budget_amount - $result ;
- 
-$update_availableamount_sql = "UPDATE budget SET available_amount =$available_amount";
-if ($conn->query($update_availableamount_sql) === TRUE) {
-  // echo "New record created successfully";
   //echo json_encode(ReadTransactions());
   } else {
-  echo "Error: " . $update_availableamount_sql . "<br>" . $conn->error;
-  }
+  echo "Error: " . $insertsql . "<br>" . $conn->error;
+ }
 
-    }
-      else if($operations == "updatefunc")
-      {
-
-
-        $updateDat = $_POST['updatedData'];
+ 
         
-        $decodedUpdateData = json_decode($updateDat, true);
-        $date = date("Y/m/d");
-        $updateId = $decodedUpdateData['id'];
-        $updateName = $decodedUpdateData['name'];
-        $updateAmount = $decodedUpdateData['amount'];
-        $updateCategory = $decodedUpdateData['category'];
-        $updatedate = $decodedUpdateData['date'];
-        
-         
-        $updatesql = "UPDATE transactions SET name ='$updateName',Amount = $updateAmount,category='$updateCategory',Date ='$updatedate', updated_on = '$date' WHERE id=$updateId ";
-        
-        
-         
-         if ($conn->query($updatesql) === TRUE) {
-          // echo "New record created successfully";
-          echo json_encode(ReadTransactions());
-          } else {
-          echo "Error: " . $updatesql . "<br>" . $conn->error;
-          }
-        
-
+          updateAvailableamount();
 
       }
 
@@ -110,11 +49,40 @@ if ($conn->query($update_availableamount_sql) === TRUE) {
    
         if ($conn->query($deletesql) === TRUE) {
           // echo "New record created successfully";
-          echo json_encode(ReadTransactions());
+          //echo json_encode(ReadTransactions());
           } else {
           echo "Error: " . $deletesql . "<br>" . $conn->error;
           }
+          updateAvailableamount();  
         }
+        else if($operations == "updatefunc")
+             {
+       
+       
+               $updateDat = $_POST['updatedData'];
+               
+               $decodedUpdateData = json_decode($updateDat, true);
+               $date = date("Y/m/d");
+               $updateId = $decodedUpdateData['id'];
+               $updateName = $decodedUpdateData['name'];
+               $updateAmount = $decodedUpdateData['amount'];
+               $updateCategory = $decodedUpdateData['category'];
+               $updatedate = $decodedUpdateData['date'];
+               
+                
+               $updatesql = "UPDATE transactions SET name ='$updateName',Amount = $updateAmount,category='$updateCategory',Date ='$updatedate', updated_on = '$date' WHERE id=$updateId ";
+               
+               
+                
+                if ($conn->query($updatesql) === TRUE) {
+                 // echo "New record created successfully";
+                 //echo json_encode(ReadTransactions());
+                 } else {
+                 echo "Error: " . $updatesql . "<br>" . $conn->error;
+                 }
+                 
+          updateAvailableamount();  
+       }
 
  
   function ReadTransactions()
@@ -174,6 +142,47 @@ if ($conn->query($update_availableamount_sql) === TRUE) {
             }
                return $return_arr;
       }
+
+      function updateAvailableamount()
+{
+  global $conn;
+ $amount_array = Array();
+ $date = date("Y/m");
+ $sql = "SELECT sum(amount) AS value_sum FROM transactions where created_by = '".$_SESSION['id']."'and created_on like  '$date%'
+ ORDER BY id DESC;";
+
+$result = $conn->query($sql);
+if($row = mysqli_fetch_array($result) ){
+$sum_transactions = $row['value_sum'];
+//array_push(  $amount_array,$amount);
+
+
+ }
+//$sum_of_transactions = array_sum($amount_array);
+
+  $sql2 = "SELECT * FROM budget where created_by = '".$_SESSION['id']."' and created_on like  '$date%'
+  ORDER BY id DESC;";
+$budget_amountsql = $conn->query($sql2);
+
+if( $row = mysqli_fetch_array($budget_amountsql)){
+
+$budget_amount = $row['amount'];
+}
+
+$available_amount = $budget_amount - $sum_transactions ;
+
+$update_availableamount_sql = "UPDATE budget SET available_amount =$available_amount";
+if ($conn->query($update_availableamount_sql) === TRUE) {
+// echo "New record created successfully";
+echo json_encode(ReadTransactions());
+} else {
+echo "Error: " . $update_availableamount_sql . "<br>" . $conn->error;
+}
+  
+}
+
+
+   
   
 $conn->close();
     ?>

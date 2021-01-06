@@ -57,6 +57,8 @@ $(document).ready(function(){
 			success: function (response) {
 				RefreshTable(response);
 				 alert ("Transaction created successfully");
+				document.getElementById("budgetamount").innerHTML = response[0].budgetAvailableAmount;
+			document.getElementById("totalamount").innerHTML = response[0].budgetAmount;
 			},
 			error: function (request, error) {
 				console.log(arguments);
@@ -114,6 +116,9 @@ $(document).ready(function(){
         success: function (response) {
 			RefreshTable(response);
 			alert("Transaction updated successfully");
+			document.getElementById("budgetamount").innerHTML = response[0].budgetAvailableAmount;
+			document.getElementById("totalamount").innerHTML = response[0].budgetAmount;
+
 		},
 		error: function (request, error) {
 			console.log(arguments);
@@ -150,6 +155,9 @@ $(document).ready(function(){
 			success: function (response) {
 				RefreshTable(response);
 				alert("Transaction deleted successfully");
+				document.getElementById("budgetamount").innerHTML = response[0].budgetAvailableAmount;
+			document.getElementById("totalamount").innerHTML = response[0].budgetAmount;
+
 			},
 			error: function (request, error) {
 				console.log(arguments);

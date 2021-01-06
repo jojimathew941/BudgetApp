@@ -25,6 +25,9 @@
 		 alert( "Please enter the email address.");
 		  $("#email").focus();
 	}
+	
+	
+
 	else if (mobile == "" || mobile == null || mobile == undefined){
 		 alert( "Please enter the mobile number.");
 		  $("#mobile").focus();
@@ -65,15 +68,21 @@
 			url: 'BusinessLayer/registrationBL.php?function=insertFunc',
 			type: 'post',
 			 data:{userData:userData},
-			 dataType: 'JSON',
+			 
 			//  cache: false,
 			//  processData: false,
 			//  contentType: false,
 			 
 			success: function (response) {
+				console.log(response);
 				//RefreshTable(response);
-				 alert (response);
-				 window.location.replace("Login.php");
+				// if (response == "fail"){
+				
+				// alert ("This email id already exists.");
+				//  }else {
+				// alert ("You have signed up successfully.");
+				//  window.location.replace("Login.php");
+				// }
 			},
 			error: function (request, error) {
 				console.log(arguments);
@@ -82,7 +91,7 @@
 			
 			  });
 			}
-			window.location.replace("Login.php");
+			//window.location.replace("Login.php");
 		}
 		$(document).ready(function(){
 
