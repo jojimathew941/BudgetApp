@@ -21,6 +21,9 @@ $namedb = $decoded['name'];
 $amountdb = $decoded['amount'];
 $categorydb = $decoded['category'];
 $datedb = $decoded['date'];
+
+budgetlimit($amountdb);
+
  
 $insertsql = "INSERT INTO transactions (name,Amount,category,Date,created_by,created_on,updated_by,updated_on)
 VALUES ( '$namedb' ,$amountdb,'$categorydb','$datedb','".$_SESSION['id']."','$date', '".$_SESSION['id']."','$date')";
@@ -36,6 +39,7 @@ VALUES ( '$namedb' ,$amountdb,'$categorydb','$datedb','".$_SESSION['id']."','$da
  
         
           updateAvailableamount();
+
 
       }
 
@@ -173,12 +177,45 @@ $available_amount = $budget_amount - $sum_transactions ;
 
 $update_availableamount_sql = "UPDATE budget SET available_amount =$available_amount";
 if ($conn->query($update_availableamount_sql) === TRUE) {
-// echo "New record created successfully";
+//echo "New record created successfully";
 echo json_encode(ReadTransactions());
 } else {
 echo "Error: " . $update_availableamount_sql . "<br>" . $conn->error;
 }
   
+}
+
+function budgetlimit($amountdb)
+{
+  global $conn;
+  $date = date("Y/m");
+  $sql = "SELECT sum(amount) AS value_sum FROM transactions where created_by = '".$_SESSION['id']."'and created_on like  '$date%'
+  ORDER BY id DESC;";
+ 
+ $result = $conn->query($sql);
+ if($row = mysqli_fetch_array($result) ){
+ $sum_transactions = $row['value_sum']+$amountdb;
+ //array_push(  $amount_array,$amount);
+ 
+ 
+  }
+ //$sum_of_transactions = array_sum($amount_array);
+ 
+   $sql2 = "SELECT * FROM budget where created_by = '".$_SESSION['id']."' and created_on like  '$date%'
+   ORDER BY id DESC;";
+ $budget_amountsql = $conn->query($sql2);
+ 
+ if( $row = mysqli_fetch_array($budget_amountsql)){
+ 
+ $budget_amount = $row['amount'];
+ }
+
+ if( $sum_transactions >  $budget_amount){
+
+  echo "fail";
+ }
+ 
+
 }
 
 

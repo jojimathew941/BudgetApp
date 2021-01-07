@@ -7,8 +7,7 @@ $(document).ready(function(){
         dataType: 'JSON',
         success: function(response){
 			RefreshTable(response);
-			document.getElementById("budgetamount").innerHTML = response[0].budgetAvailableAmount;
-			document.getElementById("totalamount").innerHTML = response[0].budgetAmount;
+			availableBudgetColorchange(response);
 			},		
 		error: function (request, error) {
 			console.log(arguments);
@@ -49,16 +48,22 @@ $(document).ready(function(){
 			url: 'BusinessLayer/Transaction.php?function=insertFunc',
 			type: 'post',
 			 data:{transactionData:transactionData},
-			 dataType: 'JSON',
+			 
 			//  cache: false,
 			//  processData: false,
 			//  contentType: false,
 			 
 			success: function (response) {
+				 if (response.localeCompare("fail ") == 0 ){
+
+					alert("No budget available");
+				 }
+				 else{
 				RefreshTable(response);
 				 alert ("Transaction created successfully");
-				document.getElementById("budgetamount").innerHTML = response[0].budgetAvailableAmount;
-			document.getElementById("totalamount").innerHTML = response[0].budgetAmount;
+				 availableBudgetColorchange(response);
+				 }
+				
 			},
 			error: function (request, error) {
 				console.log(arguments);
@@ -114,10 +119,10 @@ $(document).ready(function(){
         //  contentType: false,
         
         success: function (response) {
+			
 			RefreshTable(response);
 			alert("Transaction updated successfully");
-			document.getElementById("budgetamount").innerHTML = response[0].budgetAvailableAmount;
-			document.getElementById("totalamount").innerHTML = response[0].budgetAmount;
+			availableBudgetColorchange(response);
 
 		},
 		error: function (request, error) {
@@ -155,8 +160,7 @@ $(document).ready(function(){
 			success: function (response) {
 				RefreshTable(response);
 				alert("Transaction deleted successfully");
-				document.getElementById("budgetamount").innerHTML = response[0].budgetAvailableAmount;
-			document.getElementById("totalamount").innerHTML = response[0].budgetAmount;
+				availableBudgetColorchange(response);
 
 			},
 			error: function (request, error) {
@@ -228,3 +232,24 @@ function hidebuttonFunction()
 
 
 }
+
+function availableBudgetColorchange(response){
+
+	var availableAmount = response[0].budgetAvailableAmount;
+	var fullAmount= response[0].budgetAmount;
+	document.getElementById("budgetamount").innerHTML = availableAmount;
+	document.getElementById("totalamount").innerHTML = fullAmount;
+	var percentage = (availableAmount/fullAmount)*100;
+	if(percentage <=10){
+		$("#budgetamount").css("background-color", "red");
+	}
+	else if (percentage > 10 && percentage <=50){
+		$("#budgetamount").css("background-color", "yellow");
+	}
+	else if (percentage > 50){
+		$("#budgetamount").css("background-color", "green");
+	}
+}
+
+
+

@@ -74,15 +74,15 @@
 			//  contentType: false,
 			 
 			success: function (response) {
-				console.log(response);
+				//console.log(response);
 				//RefreshTable(response);
-				// if (response == "fail"){
+				 if (response.localeCompare("fail ") == 0 ){
 				
-				// alert ("This email id already exists.");
-				//  }else {
-				// alert ("You have signed up successfully.");
-				//  window.location.replace("Login.php");
-				// }
+				 alert ("This email id already exists.");
+				 }else {
+				alert ("You have signed up successfully.");
+				  window.location.replace("Login.php");
+				 }
 			},
 			error: function (request, error) {
 				console.log(arguments);
