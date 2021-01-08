@@ -22,7 +22,10 @@ $amountdb = $decoded['amount'];
 $categorydb = $decoded['category'];
 $datedb = $decoded['date'];
 
-budgetlimit($amountdb);
+ if(budgetlimit($amountdb) == "fail"){
+ echo json_encode("fail");
+ }
+ else{
 
  
 $insertsql = "INSERT INTO transactions (name,Amount,category,Date,created_by,created_on,updated_by,updated_on)
@@ -40,7 +43,7 @@ VALUES ( '$namedb' ,$amountdb,'$categorydb','$datedb','".$_SESSION['id']."','$da
         
           updateAvailableamount();
 
-
+}
       }
 
       else if($operations == "deletefunc")
@@ -72,6 +75,12 @@ VALUES ( '$namedb' ,$amountdb,'$categorydb','$datedb','".$_SESSION['id']."','$da
                $updateAmount = $decodedUpdateData['amount'];
                $updateCategory = $decodedUpdateData['category'];
                $updatedate = $decodedUpdateData['date'];
+
+               if(budgetlimit($updateAmount) == "fail"){
+                echo json_encode("fail");
+                }
+                else{
+               
                
                 
                $updatesql = "UPDATE transactions SET name ='$updateName',Amount = $updateAmount,category='$updateCategory',Date ='$updatedate', updated_on = '$date' WHERE id=$updateId ";
@@ -86,7 +95,8 @@ VALUES ( '$namedb' ,$amountdb,'$categorydb','$datedb','".$_SESSION['id']."','$da
                  }
                  
           updateAvailableamount();  
-       }
+                }      
+        }
 
  
   function ReadTransactions()
@@ -212,7 +222,7 @@ function budgetlimit($amountdb)
 
  if( $sum_transactions >  $budget_amount){
 
-  echo "fail";
+return  "fail";
  }
  
 

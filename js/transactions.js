@@ -48,17 +48,18 @@ $(document).ready(function(){
 			url: 'BusinessLayer/Transaction.php?function=insertFunc',
 			type: 'post',
 			 data:{transactionData:transactionData},
+			 dataType: 'JSON',
 			 
 			//  cache: false,
 			//  processData: false,
 			//  contentType: false,
 			 
 			success: function (response) {
-				 if (response.localeCompare("fail ") == 0 ){
+				  if (response === "fail"){
 
-					alert("No budget available");
-				 }
-				 else{
+				 	alert("No budget available");
+				  }
+				  else{
 				RefreshTable(response);
 				 alert ("Transaction created successfully");
 				 availableBudgetColorchange(response);
@@ -119,11 +120,16 @@ $(document).ready(function(){
         //  contentType: false,
         
         success: function (response) {
+			if (response === "fail"){
+
+				alert("No budget available");
+			 }
+			 else{
 			
 			RefreshTable(response);
 			alert("Transaction updated successfully");
 			availableBudgetColorchange(response);
-
+			 }
 		},
 		error: function (request, error) {
 			console.log(arguments);
