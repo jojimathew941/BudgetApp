@@ -62,15 +62,126 @@ $(document).ready(function(){
                else{
                 $("#married").prop('checked', true);
                }
-               var array = module.split(',');
-               var module1 = array[0];
-               var module2 = array[1];
 
-                
-               if(module1 =="budget" && module2 == "calculator"){
+               var length = module.length;
+
+               if (module.length < 11){
+
+            if(module == "budget"){
                 $('#op1').prop('checked', true);
-                $('#op2').prop('checked', true);
 
-               }
-              
+            }else if (module =="calculator"){
+
+                $('#op2').prop('checked', true);
+            }else if (module == "option3"){
+                $('#op3').prop('checked', true);
+            }
+
+        }else{
+                
+               
+               var array = module.split(',');
+               var i;
+for (i = 0; i < array.length; i++) {
+  if(array[i] == "budget"){
+    $('#op1').prop('checked', true);
+  }else if (array[i] == "calculator"){
+    $('#op2').prop('checked', true);
+  }else if (array[i] == "option3"){
+    $('#op3').prop('checked', true);
+  }
+
 }
+             
+
+            }    
+              
+
+        }
+              
+            
+        function insertdata(){
+            var name = $("#registrationName").val();
+            var dob = $("#registrationDob").val();
+            var email = $("#registrationEmail").val();
+            var mobile = $("#registrationMobile").val();
+             var enterpass = $("#registrationPassword").val();
+              var cnfrmpass = $("#cpassword").val();
+              var age = $("#registrationAge").html();
+              var sex =  $("input[name='sex']:checked").val();
+              var maritalStatus = $("input[name='status']:checked").val();
+              
+               
+          if (name == "" || name == null || name == undefined){
+               alert( "Please enter the name.");
+                $("#name").focus();
+          }
+          else if (dob == "" || dob == null || dob == undefined){
+               alert( "Please enter the date of birth.");
+                $("#dob").focus();
+          }
+              else if (email == "" || email == null || email == undefined){
+               alert( "Please enter the email address.");
+                $("#email").focus();
+          }
+          
+          
+      
+          else if (mobile == "" || mobile == null || mobile == undefined){
+               alert( "Please enter the mobile number.");
+                $("#mobile").focus();
+          }
+          else if (enterpass == "" || enterpass == null || enterpass == undefined){
+               alert( "Please enter the password.");
+                $("#password").focus();
+          }
+          else if (cnfrmpass == "" || cnfrmpass == null || cnfrmpass == undefined){
+               alert( "Please enter the password again.");
+                $("#cpassword").focus();
+          }
+          else if (!$("#op1").prop("checked")& !$("#op2").prop("checked") & !$("#op3").prop("checked") ){
+                
+            alert( "please select atleast one checkbox");
+          }
+          else if (enterpass != cnfrmpass ){
+                
+            alert( "password does not match");
+          }
+          
+          else
+          {
+              var checkboxvalues = [];
+              $(".form-check-input").each(function(){
+                  if ($(this).is(":checked")) {
+                      checkboxvalues.push($(this).val());
+                  }
+              });
+      
+              checkboxvalues = checkboxvalues.toString();
+              
+      
+      
+              var myObj = {name:name, dob:dob , checkboxvalues:checkboxvalues ,email:email,mobile:mobile,age:age,enterpass:enterpass,sex:sex,maritalStatus:maritalStatus};
+              var userData = JSON.stringify(myObj);
+               $.ajax({
+                  url: 'BusinessLayer/registrationBL.php?function=editFunc',
+                  type: 'post',
+                   data:{userData:userData},
+                   
+                  //  cache: false,
+                  //  processData: false,
+                  //  contentType: false,
+                   
+                  success: function (response) {
+                      console.log(response);
+                     
+                  },
+                  error: function (request, error) {
+                      console.log(arguments);
+                       //alert(" Can't do because: " + error);
+                  }
+                  
+                    });
+                  }
+                  //window.location.replace("Login.php");
+              }

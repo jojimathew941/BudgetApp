@@ -72,7 +72,7 @@
   <div class = "row modalpad ">
                        <div class = "col-sm-2"> <label for="email">EMAIL</label> </div>
                         
-                        <div class = "col-sm-6"> <input  id = "registrationEmail" class = "form-control"type="email" oninput= "ValidateEmail()"> 
+                        <div class = "col-sm-6"> <input  id = "registrationEmail" class = "form-control"type="email" > 
                           <p id = "message"></p>
                </div>
                     </div>

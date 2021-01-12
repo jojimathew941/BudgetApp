@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'connection.php'; 
 $operations = $_GET["function"]; 
 if ($operations == "insertFunc")
@@ -57,12 +58,49 @@ else if ($operations == "readfunc")
   echo json_encode(ReadTransactions());
     
     }
+    else if ($operations == "editFunc")
+    {
+      
+    $FormDat = $_POST['userData'];
+        
+    $decoded = json_decode($FormDat, true);
+    $date = date("Y/m/d");
+    $namedb = $decoded['name'];
+    $DOBdb = $decoded['dob'];
+    $checkboxvaluesdb = $decoded['checkboxvalues'];
+    $emaildb = $decoded['email'];
+    $mobiledb = $decoded['mobile'];
+    $agedb = $decoded['age'];
+    $passworddb = $decoded['enterpass'];
+    $sexdb = $decoded['sex'];
+    $maritaldb = $decoded['maritalStatus'];
+
+
+   
+
+
+     
+    $editsql= "UPDATE users SET Name ='$namedb',d_o_b ='$DOBdb',age='$agedb',sex='$sexdb',email='$emaildb',
+    mobile =$mobiledb,password = '$passworddb',module ='$checkboxvaluesdb',marital_status= '$maritaldb'   WHERE id='".$_SESSION['id']."'";
+     
+     if ($conn->query($editsql) === TRUE) {
+       echo "New record created successfully";
+      //echo json_encode(ReadTransactions());
+      } else {
+        echo "Error: " . $editsql . "<br>" . $conn->error;
+      }
+    
+
+
+
+
+    }
     
   function ReadTransactions()
   {
         global $conn;
         $return_arr = Array();
-     $sql = "SELECT * FROM users where id = 2";
+     $sql = "SELECT * FROM users where id = '".$_SESSION['id']."' ";
      $result = $conn->query($sql);
           
             if($row = mysqli_fetch_array($result) ){
