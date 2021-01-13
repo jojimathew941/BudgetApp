@@ -30,14 +30,12 @@ if ($operations == "function")
         echo "Welcome ".$_SESSION['name']." you have successfully logged in.";
         
     }
-    else if(  $email !=  $_SESSION['email'] ){
-echo "This email ID does not exist!";
+    else {
+echo " Email ID oe password is incorrect !";
 
-}else if ( $password !=   $_SESSION['password']){
-    echo "The password is incorrect.";
+
 }
-}
-else if (($operations == "logoutfunc"))
+if (($operations == "logoutfunc"))
  {
 
     session_destroy();

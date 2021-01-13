@@ -148,6 +148,8 @@
 
 <button  id = "submit" type="button" class="btn btn-success" onclick="insertdata()">Submit</button>
 <button id = "clear" type="button" class="btn btn-secondary" onclick="clearAll()">Clear</button>
+<button id = "daleteData" type="button" class="btn btn-danger" onclick="DeleteData()">Delete your Account</button>
+
 
 </div>		 
 					

@@ -37,8 +37,8 @@
     
     <form>
     </div> -->
-   <div class="col-sm-3"> <h4>Total budget: <span id ="totalamount" class="badge badge-secondary">5000</span></h4></div>
-   <div class="col-sm-3"> <h4>Available budget: <span id ="budgetamount" class="badge badge-secondary">5000</span></h4></div>
+   <div class="col-sm-3"> <h4>Total budget: <span id ="totalamount" class="badge badge-secondary">0</span></h4></div>
+   <div class="col-sm-3"> <h4>Available budget: <span id ="budgetamount" class="badge badge-secondary">0</span></h4></div>
 
    
 

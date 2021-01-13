@@ -185,3 +185,28 @@ for (i = 0; i < array.length; i++) {
                   }
                   //window.location.replace("Login.php");
               }
+
+              function DeleteData(){
+                alert("Are you sure that you want to permanently delete your account?" );
+                $.ajax({
+                  url: 'BusinessLayer/registrationBL.php?function=deleteFunc',
+                  type: 'post',
+                   
+                   
+                  //  cache: false,
+                  //  processData: false,
+                  //  contentType: false,
+                   
+                  success: function (response) {
+                      alert(response);
+                      window.location.replace("LogIn.php");
+                     
+                  },
+                  error: function (request, error) {
+                      console.log(arguments);
+                       //alert(" Can't do because: " + error);
+                  }
+                  
+                    });
+
+              }

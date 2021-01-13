@@ -30,7 +30,7 @@
 			success: function (response) {
 				
 				 alert (response);
-				 window.location.replace("transactions.php");
+				 window.location.replace("budget.php");
 			},
 			error: function (request, error) {
 				console.log(arguments);

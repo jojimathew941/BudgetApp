@@ -39,7 +39,7 @@ echo  "fail";
 
      
     $insertsql= "INSERT INTO users (Name,d_o_b,age,sex,email,mobile,password,module,marital_status,created_by,created_on,updated_by,updated_on)
-    VALUES ('$namedb' ,'$DOBdb','$agedb','$sexdb','$emaildb',$mobiledb,'$passworddb','$checkboxvaluesdb','$maritaldb','$createdBy','$date','$updatedBy','$date')";
+    VALUES ('$namedb' ,'$DOBdb','$agedb','$sexdb','$emaildb','$mobiledb','$passworddb','$checkboxvaluesdb','$maritaldb','$createdBy','$date','$updatedBy','$date')";
     
      
      if ($conn->query($insertsql) === TRUE) {
@@ -81,7 +81,7 @@ else if ($operations == "readfunc")
 
      
     $editsql= "UPDATE users SET Name ='$namedb',d_o_b ='$DOBdb',age='$agedb',sex='$sexdb',email='$emaildb',
-    mobile =$mobiledb,password = '$passworddb',module ='$checkboxvaluesdb',marital_status= '$maritaldb'   WHERE id='".$_SESSION['id']."'";
+    mobile ='$mobiledb',password = '$passworddb',module ='$checkboxvaluesdb',marital_status= '$maritaldb'   WHERE id='".$_SESSION['id']."'";
      
      if ($conn->query($editsql) === TRUE) {
        echo "New record created successfully";
@@ -90,6 +90,41 @@ else if ($operations == "readfunc")
         echo "Error: " . $editsql . "<br>" . $conn->error;
       }
     
+
+
+
+
+    }
+    else if ($operations == "deleteFunc"){
+      $deletetransactionsql = "Delete from transactions where id = '".$_SESSION['id']."' ";
+      if ($conn->query( $deletetransactionsql ) === TRUE) {
+       // echo "Deleted successfully";
+       //echo json_encode(ReadTransactions());
+       } else {
+         echo "Error: " .  $deletetransactionsql . "<br>" . $conn->error;
+       }
+    
+
+     $deletebudgetsql = "Delete from budget where id = '".$_SESSION['id']."' ";
+
+     if ($conn->query(  $deletebudgetsql ) === TRUE) {
+     // echo "Deleted successfully";
+     //echo json_encode(ReadTransactions());
+     } else {
+       echo "Error: " .  $deletebudgetsql  . "<br>" . $conn->error;
+     }
+
+     $deleteusersql = "Delete from users where id = '".$_SESSION['id']."' ";
+
+     
+     if ($conn->query( $deleteusersql) === TRUE) {
+      echo "Deleted successfully";
+     //echo json_encode(ReadTransactions());
+     } else {
+       echo "Error: " . $deleteusersql . "<br>" . $conn->error;
+     }
+   
+
 
 
 

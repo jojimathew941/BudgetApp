@@ -1,7 +1,7 @@
 <?php
 session_start();
 include 'connection.php';
-$available__amount = 100000;
+
 $operations = $_GET["function"];     
 if ($operations == "readfunc")
 { 
@@ -29,7 +29,7 @@ if ($operations == "readfunc")
             
              
             $insertsql = "INSERT INTO budget (Name,amount,available_amount,month,year,created_by,created_on,updated_by,updated_on)
-            VALUES ('$namedb' ,$amountdb, $available__amount,'$monthdb',' $yeardb','".$_SESSION['id']."','$date','".$_SESSION['id']."','$date')";
+            VALUES ('$namedb' ,$amountdb, $amountdb,'$monthdb',' $yeardb','".$_SESSION['id']."','$date','".$_SESSION['id']."','$date')";
             
              
              if ($conn->query($insertsql) === TRUE) {
