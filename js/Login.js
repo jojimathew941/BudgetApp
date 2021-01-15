@@ -28,9 +28,14 @@
 			//  contentType: false,
 			 
 			success: function (response) {
-				
+				if(response == "false"){
+					alert("Email id or password is incorrect");
+					$("#emailID").val("");
+					$("#password").val("");
+				}else{
 				 alert (response);
 				 window.location.replace("budget.php");
+				}
 			},
 			error: function (request, error) {
 				console.log(arguments);

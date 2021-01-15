@@ -96,7 +96,7 @@ else if ($operations == "readfunc")
 
     }
     else if ($operations == "deleteFunc"){
-      $deletetransactionsql = "Delete from transactions where id = '".$_SESSION['id']."' ";
+      $deletetransactionsql = "Delete from transactions where created_by = '".$_SESSION['id']."' ";
       if ($conn->query( $deletetransactionsql ) === TRUE) {
        // echo "Deleted successfully";
        //echo json_encode(ReadTransactions());
@@ -105,7 +105,7 @@ else if ($operations == "readfunc")
        }
     
 
-     $deletebudgetsql = "Delete from budget where id = '".$_SESSION['id']."' ";
+     $deletebudgetsql = "Delete from budget where created_by = '".$_SESSION['id']."' ";
 
      if ($conn->query(  $deletebudgetsql ) === TRUE) {
      // echo "Deleted successfully";

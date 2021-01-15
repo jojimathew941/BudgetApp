@@ -31,9 +31,10 @@ if ($operations == "function")
         
     }
     else {
-echo " Email ID oe password is incorrect !";
+echo "false";
 
 
+}
 }
 if (($operations == "logoutfunc"))
  {

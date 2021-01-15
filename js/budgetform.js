@@ -133,7 +133,9 @@ $("#budgetamount").val(parseAmount);
 			
  			success: function (response) {
  			//	RefreshTable(response);
- 				 alert ("Budget created successfully");
+          alert (response);
+          window.location.replace("budget.php");
+          
  			},
 			error: function (request, error) {
 				console.log(arguments);

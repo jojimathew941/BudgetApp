@@ -7,6 +7,7 @@ $(document).ready(function(){
         dataType: 'JSON',
         success: function(response){
 			RefreshTable(response);
+			document.getElementById("totalamount").innerHTML = response[0].budgetAmount;
 			availableBudgetColorchange(response);
 			},		
 		error: function (request, error) {

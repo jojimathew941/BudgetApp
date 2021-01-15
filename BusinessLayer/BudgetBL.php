@@ -33,7 +33,7 @@ if ($operations == "readfunc")
             
              
              if ($conn->query($insertsql) === TRUE) {
-               echo "New record created successfully";
+               //echo "New budget created successfully";
               echo json_encode(ReadTransactions());
               } else {
                 echo "Error: " . $insertsql . "<br>" . $conn->error;
