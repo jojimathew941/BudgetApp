@@ -200,6 +200,10 @@ for (i = 0; i < array.length; i++) {
                   success: function (response) {
                       alert(response);
                       window.location.replace("LogIn.php");
+                      window.history.forward(); 
+                      function noBack() { 
+                          window.history.forward(); }
+
                      
                   },
                   error: function (request, error) {

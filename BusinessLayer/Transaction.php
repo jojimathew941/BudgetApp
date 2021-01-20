@@ -6,7 +6,9 @@ $budget_amount;
 $operations = $_GET["function"];     
 if ($operations == "readfunc")
 { 
+  
   echo json_encode(ReadTransactions());
+
     
     }
     else if($operations == "insertFunc")
@@ -123,8 +125,16 @@ VALUES ( '$namedb' ,$amountdb,'$categorydb','$datedb','".$_SESSION['id']."','$da
 
 
      $result = $conn->query($sql);
-          
+
+    
+     if($result->num_rows == 0){
+
+ $return = array($budgetAmount,$budgetAvailableAmount );
+return $return;
+
+      }  else{ 
             while($row = mysqli_fetch_array($result) ){
+
                 $id = $row['id'];
                 $name = $row['Name'];
                 $amount = $row['amount'];
@@ -139,7 +149,7 @@ VALUES ( '$namedb' ,$amountdb,'$categorydb','$datedb','".$_SESSION['id']."','$da
                                 "name" => $name,
                                 "Amount" => $amount,
                                 "category" => $category,
-                                "Date" => $Date_s,
+                               "Date" => $Date_s,
                                 "created_by" => $createdby,
                                 "created_on" => $createdon,
                                 "budgetAmount"=>  $budgetAmount,
@@ -154,7 +164,9 @@ VALUES ( '$namedb' ,$amountdb,'$categorydb','$datedb','".$_SESSION['id']."','$da
                             
     
             }
+          
                return $return_arr;
+          }
       }
 
       function updateAvailableamount()

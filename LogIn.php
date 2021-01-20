@@ -14,11 +14,11 @@
 </head>
 <body>
 
-<div class="container box">
-  <div class="row h-100 justify-content-center align-items-center">
-    <form class="col-sm-5">
+<div class="container ">
+  <div class="row h-100 justify-content-center align-items-center ">
+    <form class="col-sm-5 ">
         
-    	<h1 >Login</h1>
+    	<h1 style = "padding-left:100px;"  >Budget App</h1>
     	<br>
       <div class="form-group">
         

@@ -11,7 +11,7 @@ if ($operations == "function")
     $decoded = json_decode( $loginData, true);
     $email = $decoded['emailid'];
     $password = $decoded['password'];
-    $sql = "SELECT * FROM users where email = '$email' and password =  '$password' ";
+    $sql = "SELECT * FROM users where email = '$email'and password =  '$password' ";
     $result = $conn->query($sql);
     if($result->num_rows > 0){
         $row = mysqli_fetch_array($result);
@@ -31,7 +31,16 @@ if ($operations == "function")
         
     }
     else {
-echo "false";
+        $emailsql = "SELECT * FROM users where email = '$email'";
+        $emailResult = $conn->query($emailsql);
+        if($emailResult->num_rows == 0){
+            echo "emailfalse";
+        }else{
+            echo "passwordfalse";
+
+        }
+
+
 
 
 }

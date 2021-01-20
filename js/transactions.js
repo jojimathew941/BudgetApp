@@ -1,14 +1,27 @@
 $(document).ready(function(){
 	
 	
-	$.ajax({
+	$.ajax(
+		{
         url: 'BusinessLayer/Transaction.php?function=readfunc',
 		type: 'get',
         dataType: 'JSON',
         success: function(response){
-			RefreshTable(response);
-			document.getElementById("totalamount").innerHTML = response[0].budgetAmount;
+			if(response.length == 2){
+				document.getElementById("budgetamount").innerHTML = response[0];
+				document.getElementById("totalamount").innerHTML = response[1] ;
+				
+	
+		$("#budgetamount").css("background-color", "green");
+	
+			
+			}else{
+				
 			availableBudgetColorchange(response);
+	
+			RefreshTable(response);
+			}
+			
 			},		
 		error: function (request, error) {
 			console.log(arguments);

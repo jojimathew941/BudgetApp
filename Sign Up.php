@@ -80,8 +80,8 @@
 					<div class = "row  modalpad ">
                        <div class = "col-sm-2"> <label for="mobile">Mobile</label> </div>
                         
-                        <div class = "col-sm-6"> <input  id = "registrationMobile" class = "form-control"type="number" name="mobile"> 
-                           
+                        <div class = "col-sm-6"> <input  id = "registrationMobile" class = "form-control"type="number" name="mobile"  oninput= "ValidatePhonenumber()" > 
+                        <p id = "Mobilemessage"></p>
                         </div>
                     </div>
 					

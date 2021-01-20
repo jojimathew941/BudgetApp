@@ -76,8 +76,8 @@
   
 
 
-
-                            <button type="submit"  class="btn btn-dark " onclick="insertData()">Submit</button>
+<button type="submit"  class="btn btn-dark " onclick="Edit()">Update</button>
+                            
                            
 
                              

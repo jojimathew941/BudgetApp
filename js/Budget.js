@@ -164,7 +164,7 @@ function showInForm(id)
    
   
       
-         var url = "budgetform.php?id=" + encodeURIComponent(id) +
+         var url = "budgetFormEdit.php?id=" + encodeURIComponent(id) +
           "&name=" + encodeURIComponent(name)+
         "&amount=" + encodeURIComponent(amount);
        window.location.href = url;

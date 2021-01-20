@@ -22,24 +22,36 @@ if ($operations == "readfunc")
             
             $decoded = json_decode($FormDat, true);
             $date = date("Y/m/d");
+            $dateNew = date("Y/m");
             $namedb = $decoded['name'];
             $amountdb = $decoded['amount'];
             $monthdb = $decoded['month'];
             $yeardb = $decoded['year'];
+            $sql = "select * from budget where created_by = '".$_SESSION['id']."'and created_on like  '$dateNew%'
+            ORDER BY id DESC;";
+           $result = $conn->query($sql);
+           if($result->num_rows == 1){
+
+            echo "Only one budget for one month";
+
+           }else{
+                
+            
             
              
             $insertsql = "INSERT INTO budget (Name,amount,available_amount,month,year,created_by,created_on,updated_by,updated_on)
             VALUES ('$namedb' ,$amountdb, $amountdb,'$monthdb',' $yeardb','".$_SESSION['id']."','$date','".$_SESSION['id']."','$date')";
             
-             
+            
              if ($conn->query($insertsql) === TRUE) {
-               //echo "New budget created successfully";
-              echo json_encode(ReadTransactions());
+               echo "New budget created successfully";
+             // echo json_encode(ReadTransactions());
               } else {
                 echo "Error: " . $insertsql . "<br>" . $conn->error;
               }
-            
             }
+            
+        }
           
 
                   else if($operations == "updatefunc")
@@ -54,10 +66,28 @@ if ($operations == "readfunc")
                     $updateName = $decodedUpdateData['name'];
                     $updateAmount = $decodedUpdateData['amount'];
                     
+                    $date = date("Y/m");
+                    $sql = "SELECT sum(amount) AS value_sum FROM transactions where created_by = '".$_SESSION['id']."'and created_on like  '$date%'
+                    ORDER BY id DESC;";
+                   
+                   $result = $conn->query($sql);
+                   $row = mysqli_fetch_array($result);
+                   $sum_transactions = $row['value_sum'];
+                   //array_push(  $amount_array,$amount);
+                   $updateAvailableAmount =  $updateAmount -  $sum_transactions;
+                   
+                    
+                   
+
+                      if($sum_transactions >  $updateAmount){
+
+                     echo json_encode(   $return =array( "Error:Your transaactions have exceeded your available budget amount."));
+                      }
+                      else{
                     
                     
                      
-                    $updatesql = "UPDATE budget SET name ='$updateName',Amount = $updateAmount, updated_on = '$date' WHERE id=$updateId ";
+                    $updatesql = "UPDATE budget SET name ='$updateName',Amount = $updateAmount,available_amount = $updateAvailableAmount , updated_on = '$date' WHERE id=$updateId ";
                     
                     
                      
@@ -68,7 +98,7 @@ if ($operations == "readfunc")
                       echo "Error: " . $updatesql . "<br>" . $conn->error;
                       }
                     
-            
+                    }
             
                   }
                   else if($operations == "deletefunc")
@@ -96,7 +126,7 @@ if ($operations == "readfunc")
           global $conn;
           $date = date("Y/m");
           $return_arr = Array();
-       $sql = "select * from budget where created_by = '".$_SESSION['id']."'
+       $sql = "select * from budget where created_by = '".$_SESSION['id']."'and created_on like  '$date%'
         ORDER BY id DESC;";
        $result = $conn->query($sql);
             

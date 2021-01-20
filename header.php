@@ -52,6 +52,10 @@ session_start();
         success: function(response){
             alert(response);
             window.location.replace("Login.php");
+            window.history.forward(); 
+        function noBack() { 
+            window.history.forward(); 
+        } 
 			},		
 		error: function (request, error) {
 			console.log(arguments);

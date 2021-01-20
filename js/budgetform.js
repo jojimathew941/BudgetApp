@@ -89,8 +89,9 @@ $("#budgetamount").val(parseAmount);
         //  contentType: false,
         
         success: function (response) {
+          alert(response[0]);
 			RefreshTable(response);
-			alert("Budget updated successfully");
+			
 		},
 		error: function (request, error) {
 			console.log(arguments);

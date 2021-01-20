@@ -28,11 +28,16 @@
 			//  contentType: false,
 			 
 			success: function (response) {
-				if(response == "false"){
-					alert("Email id or password is incorrect");
+				if(response == "emailfalse"){
+					alert("Email id  is incorrect");
 					$("#emailID").val("");
 					$("#password").val("");
-				}else{
+				}else if(response == "passwordfalse"){
+					alert("Password  is incorrect");
+					$("#emailID").val("");
+					$("#password").val("");
+				}
+				else{
 				 alert (response);
 				 window.location.replace("budget.php");
 				}

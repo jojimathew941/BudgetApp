@@ -11,7 +11,8 @@
 		var age = $("#registrationAge").html();
 		var sex =  $("input[name='sex']:checked").val();
 		var maritalStatus = $("input[name='status']:checked").val();
-		
+		var emailFormat = $("#message").html()
+		var mobileFormat = $("#Mobilemessage").html()
 		 
     if (name == "" || name == null || name == undefined){
 		 alert( "Please enter the name.");
@@ -47,7 +48,16 @@
     else if (enterpass != cnfrmpass ){
 	      
 	  alert( "password does not match");
-    }
+	}
+	else if (emailFormat == "INVALID EMAIL ADDRESS"){
+	      
+		alert( " Email ID is invalid.");
+	  }
+	  else if (mobileFormat == "INVALID MOBILE NUMBER"){
+	      
+		alert( " Mobile Number is invalid.");
+	  }
+	
 	
 	else
 	{
@@ -152,14 +162,14 @@ var mailformat = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@
 if($("#registrationEmail").val().match(mailformat))
 {
 
-	$("#message").text ("valid").css("color", "green");
+	$("#message").text (" ").css("color", "green");
 //alert("You have entered a valid email address!");    //The pop up alert for a valid email address
 //document.form1.text1.focus();
 //return true;
 }
 else
 {
-	$("#message").text ("Invalid").css("color", "red");
+	$("#message").text ("INVALID EMAIL ADDRESS").css("color", "red");
 //alert("You have entered an invalid email address!");    //The pop up alert for an invalid email address
 //document.form1.text1.focus();
 //return false;
@@ -184,6 +194,20 @@ $("#single").prop('checked', true);
 		
 
 
+}
+function ValidatePhonenumber()
+{
+  var phoneno = /^\d{10}$/;
+  if($("#registrationMobile").val().match(phoneno))
+        {
+			$("#Mobilemessage").text (" ").css("color", "green");
+      return true;
+        }
+      else
+        {
+			$("#Mobilemessage").text ("INVALID MOBILE NUMBER").css("color", "red");
+        return false;
+        }
 }
 	
 	 
