@@ -118,6 +118,7 @@ else if ($operations == "readfunc")
 
      
      if ($conn->query( $deleteusersql) === TRUE) {
+      session_destroy();
       echo "Deleted successfully";
      //echo json_encode(ReadTransactions());
      } else {

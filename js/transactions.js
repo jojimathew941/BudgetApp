@@ -178,9 +178,29 @@ $(document).ready(function(){
 			//  contentType: false,
 			
 			success: function (response) {
-				RefreshTable(response);
+
+				if(response.length == 2){
+						
 				alert("Transaction deleted successfully");
+					document.getElementById("budgetamount").innerHTML = response[0];
+					document.getElementById("totalamount").innerHTML = response[1] ;
+					document.getElementById("userTable").deleteRow(1);
+				
+		
+			$("#budgetamount").css("background-color", "green");
+		
+				
+				}else{
+						
+				alert("Transaction deleted successfully");
+					
 				availableBudgetColorchange(response);
+		
+				RefreshTable(response);
+				}
+				
+				
+				
 
 			},
 			error: function (request, error) {
@@ -210,10 +230,13 @@ function RefreshTable(response)
 {
 	var len = response.length;
 	var TableData = "";
+
+	
+	   
 			for(var i=0; i<len; i++)
 			{
                 var id = response[i].id;
-                var name = response[i].name;
+                 var name = response[i].name;
                 var amount = response[i].Amount;
 				var category = response[i].category;
 				var Date = response[i].Date;

@@ -63,7 +63,6 @@ $(document).ready(function(){
                 $("#married").prop('checked', true);
                }
 
-               var length = module.length;
 
                if (module.length < 11){
 
@@ -176,7 +175,7 @@ for (i = 0; i < array.length; i++) {
                       console.log(response);
                      
                   },
-                  error: function (request, error) {
+                  error: function () {
                       console.log(arguments);
                        //alert(" Can't do because: " + error);
                   }
@@ -197,16 +196,13 @@ for (i = 0; i < array.length; i++) {
                   //  processData: false,
                   //  contentType: false,
                    
-                  success: function (response) {
-                      alert(response);
-                      window.location.replace("LogIn.php");
-                      window.history.forward(); 
-                      function noBack() { 
-                          window.history.forward(); }
-
-                     
+                  success: function () { 
+                    alert(response);
+                   window.location.replace("Login.php");
+            setTimeout("preventBack()", 0);
+            window.onunload=function(){null};
                   },
-                  error: function (request, error) {
+                  error: function () {
                       console.log(arguments);
                        //alert(" Can't do because: " + error);
                   }

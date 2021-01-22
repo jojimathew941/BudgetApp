@@ -133,6 +133,8 @@ VALUES ( '$namedb' ,$amountdb,'$categorydb','$datedb','".$_SESSION['id']."','$da
 return $return;
 
       }  else{ 
+      
+
             while($row = mysqli_fetch_array($result) ){
 
                 $id = $row['id'];
@@ -230,6 +232,9 @@ function budgetlimit($amountdb)
  if( $row = mysqli_fetch_array($budget_amountsql)){
  
  $budget_amount = $row['amount'];
+ //$available_amount = $row['available_amount']+$amountdb;
+
+
  }
 
  if( $sum_transactions >  $budget_amount){
