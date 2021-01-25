@@ -6,12 +6,12 @@
 
   if (emailid == "" ||emailid == null || emailid == undefined)
     {
-		 alert( "Please enter your email address.");
+		$.Toast('Please enter the email address', {'duration': 3000, 'class': 'alert', 'position':'top','align':'center'});
 		  $("#emailID").focus();
 	}
 	else if (password == "" || password == null || password == undefined)
 	{
-		 alert( "Please enter your password.");
+		$.Toast('Please enter the password', {'duration': 3000, 'class': 'alert', 'position':'top','align':'center'});
 		  $("#password").focus();
 	}
   else 
@@ -29,16 +29,16 @@
 			 
 			success: function (response) {
 				if(response == "emailfalse"){
-					alert("Email id  is incorrect");
+					$.Toast('email id is incorrect', {'duration': 3000, 'class': 'alert', 'position':'top','align':'center'});
 					$("#emailID").val("");
 					$("#password").val("");
 				}else if(response == "passwordfalse"){
-					alert("Password  is incorrect");
+					$.Toast('Password is incorrect', {'duration': 1000, 'class': 'alert', 'position':'top','align':'center'});
 					$("#emailID").val("");
 					$("#password").val("");
 				}
 				else{
-				 alert (response);
+					//$.Toast(response, {'duration': 1000, 'class': 'success', 'position':'top','align':'center'});
 				 window.location.replace("budget.php");
 				}
 			},

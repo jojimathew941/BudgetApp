@@ -1,5 +1,15 @@
 $(document).ready(function(){
 	
+	var date_input=$('input[id="date"]'); //our date input has the name "date"
+	var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+	date_input.datepicker({
+		format: 'yyyy-mm-dd',
+		container: container,
+		todayHighlight: true,
+		autoclose: true,
+		endDate: new Date(new Date().setDate(new Date().getDate() - 6570)),
+		startDate: new Date(new Date().setDate(new Date().getDate() - 21900)),
+	})
 	
 	$.ajax(
 		{
@@ -25,7 +35,7 @@ $(document).ready(function(){
 			},		
 		error: function (request, error) {
 			console.log(arguments);
-			alert(" Can't do because: " + error);
+			$.Toast('No budget available', {'duration': 3000, 'class': 'alert', 'position':'top','align':'center'});
 		}
 		
 		  });
@@ -46,13 +56,13 @@ $(document).ready(function(){
 	  var date = $("#date").val();
 	  var category = $("#category").val();
     if (name == "" || name == null || name == undefined){
-		 alert( "Please enter your name.");
+		$.Toast('Please enter your name', {'duration': 3000, 'class': 'alert', 'position':'top','align':'center'});
 	}
 	else if (date == "" || date == null || date == undefined){
-		 alert( "Please enter the Date.");
+		$.Toast('Please enter the Date', {'duration': 3000, 'class': 'alert', 'position':'top','align':'center'});
 	}
 		else if (amount == "" || amount == null || amount == undefined){
-		 alert( "Please enter the amount.");
+			$.Toast('Please enter the amount', {'duration': 3000, 'class': 'alert', 'position':'top','align':'center'});
 	}
 	
 	else {
@@ -65,17 +75,16 @@ $(document).ready(function(){
 			 dataType: 'JSON',
 			 
 			//  cache: false,
-			//  processData: false,
+			//  processData: false
 			//  contentType: false,
 			 
 			success: function (response) {
 				  if (response === "fail"){
-
-				 	alert("No budget available");
+					$.Toast('No budget available', {'duration': 3000, 'class': 'alert', 'position':'top','align':'center'});
 				  }
 				  else{
 				RefreshTable(response);
-				 alert ("Transaction created successfully");
+				$.Toast('Transaction created successfully', {'duration': 3000, 'class': 'alert', 'position':'top','align':'center'});
 				 availableBudgetColorchange(response);
 				 }
 				
@@ -136,12 +145,12 @@ $(document).ready(function(){
         success: function (response) {
 			if (response === "fail"){
 
-				alert("No budget available");
+				$.Toast('No budget available', {'duration':3000, 'class': 'alert', 'position':'top','align':'center'});
 			 }
 			 else{
 			
 			RefreshTable(response);
-			alert("Transaction updated successfully");
+			$.Toast('Transaction updated successfully', {'duration': 3000, 'class': 'alert', 'position':'top','align':'center'});
 			availableBudgetColorchange(response);
 			 }
 		},
@@ -181,7 +190,7 @@ $(document).ready(function(){
 
 				if(response.length == 2){
 						
-				alert("Transaction deleted successfully");
+					$.Toast('Transaction deleted successfully', {'duration': 3000, 'class': 'success', 'position':'top','align':'center'});
 					document.getElementById("budgetamount").innerHTML = response[0];
 					document.getElementById("totalamount").innerHTML = response[1] ;
 					document.getElementById("userTable").deleteRow(1);
@@ -192,7 +201,7 @@ $(document).ready(function(){
 				
 				}else{
 						
-				alert("Transaction deleted successfully");
+					$.Toast('Transaction deleted successfully', {'duration': 3000, 'class': 'success', 'position':'top','align':'center'});
 					
 				availableBudgetColorchange(response);
 		

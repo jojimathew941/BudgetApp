@@ -59,10 +59,10 @@ $(document).ready(function()
 			},		
 		error: function (request, error) {
 			console.log(arguments);
-			alert(" Can't do because: " + error);
+      $.Toast(  " Can't do because:"  + error, {'duration': 1000, 'class': 'alert', 'position':'top','align':'center'});
         }
         
-        
+     
 		
 		  });
 			  
@@ -97,11 +97,11 @@ $(document).ready(function()
                         // "<td align='center'>" + createdon + "</td>" +
                         // "<td align='center'>" + updatedby + "</td>" +
                         // "<td align='center'>" + updatedon + "</td>" +
-                        "<td  align='center'><a href='#'  id='edit"+id+"' onclick ='showInForm("+id+")'><i class='fa fa-pencil' style='font-size:36px;'  aria-hidden='true'></i></a><a href='#' id='delete"+id+"'  onclick ='deleteData("+id+")' ><i class='fa fa-trash' style='font-size:36px;padding-left:25px;' aria-hidden='true'></i></a></td>"+
+                        "<td  align='center'><a href='#'  id='edit"+id+"' onclick ='showInForm("+id+")'><i class='fa fa-pencil' style='font-size:36px;'  aria-hidden='true'></i></a></td>"+
     
                         "</tr>";
                         TableData= TableData + tr_str;
-                }
+                }  
                 
                 $("#budgetTable tbody").html(TableData );
                 
@@ -213,7 +213,8 @@ function showInForm(id)
 			
 			success: function (response) {
 				RefreshTable(response);
-				alert("Transaction deleted successfully");
+       // $.Toast(' Budget deleted successfully', {'duration': 1000, 'class': 'alert', 'position':'top','align':'center'});
+        
 			},
 			error: function (request, error) {
 				console.log(arguments);

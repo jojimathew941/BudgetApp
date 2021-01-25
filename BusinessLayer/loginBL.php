@@ -27,7 +27,7 @@ if ($operations == "function")
         $_SESSION['maritalstatus']= $row['marital_Status'];
         $_SESSION['password'] = $row['password'];
        
-        echo "Welcome ".$_SESSION['name']." you have successfully logged in.";
+       // echo "Welcome ".$_SESSION['name']." you have successfully logged in.";
         
     }
     else {

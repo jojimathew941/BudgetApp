@@ -83,13 +83,13 @@ $("#budgetamount").val(parseAmount);
 		url: 'BusinessLayer/budgetBL.php?function=updatefunc',
     type: 'post',
 		 data:{updatedData:updatedData},
-		 dataType: 'JSON',
+		 //dataType: 'JSON',
         //  cache: false,
         //  processData: false,
         //  contentType: false,
         
         success: function (response) {
-          alert(response[0]);
+          $.Toast(response[0], {'duration': 3000, 'class': 'alert', 'position':'top','align':'center'});
 			RefreshTable(response);
 			
 		},
@@ -114,12 +114,13 @@ $("#budgetamount").val(parseAmount);
 
    if (name == "" || name == null || name == undefined)
      {
-		 alert( "Name field is empty");
+      $.Toast('Please enter your name', {'duration': 3000, 'class': 'alert', 'position':'top','align':'center'});
+	
  		  $("#budgetname").focus();
 	}
 	else if (amount == "" || amount == null || amount == undefined)
 	{
- 		 alert( "Amount field is empty");
+    $.Toast('Please enter the amount', {'duration': 3000, 'class': 'alert', 'position':'top','align':'center'});
  		  $("#amount").focus();
  	}
    else 
@@ -134,7 +135,7 @@ $("#budgetamount").val(parseAmount);
 			
  			success: function (response) {
  			//	RefreshTable(response);
-          alert (response);
+       $.Toast(response, {'duration': 3000, 'class': 'info', 'position':'top','align':'center'});
           window.location.replace("budget.php");
           
  			},

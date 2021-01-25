@@ -11,7 +11,8 @@ $(document).ready(function(){
 			},		
 		error: function (request, error) {
 			console.log(arguments);
-			alert(" Can't do because: " + error);
+      $.Toast(" Can't do because: " + error, {'duration': 3000, 'class': 'alert', 'position':'top','align':'center'});
+     
 		}
 		
 		  });
@@ -112,39 +113,39 @@ for (i = 0; i < array.length; i++) {
               
                
           if (name == "" || name == null || name == undefined){
-               alert( "Please enter the name.");
+            $.Toast('Please enter the name', {'duration': 3000, 'class': 'alert', 'position':'top','align':'center'});
                 $("#name").focus();
           }
           else if (dob == "" || dob == null || dob == undefined){
-               alert( "Please enter the date of birth.");
+            $.Toast('Please enter the date of birth', {'duration': 3000, 'class': 'alert', 'position':'top','align':'center'});
                 $("#dob").focus();
           }
               else if (email == "" || email == null || email == undefined){
-               alert( "Please enter the email address.");
+                $.Toast('Please enter the email address', {'duration': 3000, 'class': 'alert', 'position':'top','align':'center'});
                 $("#email").focus();
           }
           
           
       
           else if (mobile == "" || mobile == null || mobile == undefined){
-               alert( "Please enter the mobile number.");
+            $.Toast('Please enter the mobile number', {'duration': 3000, 'class': 'alert', 'position':'top','align':'center'});
                 $("#mobile").focus();
           }
           else if (enterpass == "" || enterpass == null || enterpass == undefined){
-               alert( "Please enter the password.");
+            $.Toast('Please enter the password', {'duration': 3000, 'class': 'alert', 'position':'top','align':'center'});
                 $("#password").focus();
           }
           else if (cnfrmpass == "" || cnfrmpass == null || cnfrmpass == undefined){
-               alert( "Please enter the password again.");
+            $.Toast('Please enter the password again', {'duration': 3000, 'class': 'alert', 'position':'top','align':'center'});
                 $("#cpassword").focus();
           }
           else if (!$("#op1").prop("checked")& !$("#op2").prop("checked") & !$("#op3").prop("checked") ){
                 
-            alert( "please select atleast one checkbox");
+            $.Toast('Please select atleast one checkbox', {'duration': 3000, 'class': 'alert', 'position':'top','align':'center'});
           }
           else if (enterpass != cnfrmpass ){
                 
-            alert( "password does not match");
+            $.Toast('Password does not match', {'duration': 3000, 'class': 'alert', 'position':'top','align':'center'});
           }
           
           else
@@ -187,6 +188,7 @@ for (i = 0; i < array.length; i++) {
 
               function DeleteData(){
                 alert("Are you sure that you want to permanently delete your account?" );
+                
                 $.ajax({
                   url: 'BusinessLayer/registrationBL.php?function=deleteFunc',
                   type: 'post',
@@ -196,15 +198,17 @@ for (i = 0; i < array.length; i++) {
                   //  processData: false,
                   //  contentType: false,
                    
-                  success: function () { 
-                    alert(response);
-                   window.location.replace("Login.php");
+                  success: function (response) { 
+                  
+                   window.location.replace("index.php");
+                   $.Toast(response, {'duration': 3000, 'class': 'success', 'position':'top','align':'center'});
             setTimeout("preventBack()", 0);
             window.onunload=function(){null};
                   },
                   error: function () {
                       console.log(arguments);
-                       //alert(" Can't do because: " + error);
+                      $.Toast(" Can't do because: " + error, {'duration': 3000, 'class': 'alert', 'position':'top','align':'center'});
+                      
                   }
                   
                     });

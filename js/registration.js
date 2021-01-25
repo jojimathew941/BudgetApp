@@ -15,47 +15,47 @@
 		var mobileFormat = $("#Mobilemessage").html()
 		 
     if (name == "" || name == null || name == undefined){
-		 alert( "Please enter the name.");
+		$.Toast('Please enter the name', {'duration': 3000, 'class': 'alert', 'position':'top','align':'center'});
 		  $("#name").focus();
 	}
 	else if (dob == "" || dob == null || dob == undefined){
-		 alert( "Please enter the date of birth.");
+		$.Toast('Please enter the date of birth', {'duration': 3000, 'class': 'alert', 'position':'top','align':'center'});
 		  $("#dob").focus();
 	}
 		else if (email == "" || email == null || email == undefined){
-		 alert( "Please enter the email address.");
+			$.Toast('Please enter the email address', {'duration': 3000, 'class': 'alert', 'position':'top','align':'center'});
 		  $("#email").focus();
 	}
 	
 	
 
 	else if (mobile == "" || mobile == null || mobile == undefined){
-		 alert( "Please enter the mobile number.");
+		$.Toast('Please enter the mobile number', {'duration': 3000, 'class': 'alert', 'position':'top','align':'center'});
 		  $("#mobile").focus();
 	}
 	else if (enterpass == "" || enterpass == null || enterpass == undefined){
-		 alert( "Please enter the password.");
+		$.Toast('Please enter the password', {'duration': 3000, 'class': 'alert', 'position':'top','align':'center'});
 		  $("#password").focus();
 	}
 	else if (cnfrmpass == "" || cnfrmpass == null || cnfrmpass == undefined){
-		 alert( "Please enter the password again.");
+		$.Toast('Please enter the password again', {'duration': 3000, 'class': 'alert', 'position':'top','align':'center'});
 		  $("#cpassword").focus();
 	}
 	else if (!$("#op1").prop("checked")& !$("#op2").prop("checked") & !$("#op3").prop("checked") ){
 	      
-	  alert( "please select atleast one checkbox");
+		$.Toast('Please select atleast one checkbox', {'duration': 3000, 'class': 'alert', 'position':'top','align':'center'});
     }
     else if (enterpass != cnfrmpass ){
 	      
-	  alert( "password does not match");
+		$.Toast('Password does not match', {'duration': 3000, 'class': 'alert', 'position':'top','align':'center'});
 	}
 	else if (emailFormat == "INVALID EMAIL ADDRESS"){
 	      
-		alert( " Email ID is invalid.");
+		$.Toast('Email ID is invalid', {'duration': 3000, 'class': 'alert', 'position':'top','align':'center'});
 	  }
 	  else if (mobileFormat == "INVALID MOBILE NUMBER"){
 	      
-		alert( " Mobile Number is invalid.");
+		$.Toast('Mobile number is invalid', {'duration': 3000, 'class': 'alert', 'position':'top','align':'center'});
 	  }
 	
 	
@@ -88,10 +88,10 @@
 				//RefreshTable(response);
 				 if (response.localeCompare("fail ") == 0 ){
 				
-				 alert ("This email id already exists.");
+					$.Toast('This email id already exists', {'duration': 3000, 'class': 'alert', 'position':'top','align':'center'});
 				 }else {
-				alert ("You have signed up successfully.");
-				  window.location.replace("Login.php");
+					$.Toast('You have signed up successfully', {'duration': 3000, 'class': 'success', 'position':'top','align':'center'});
+				  window.location.replace("index.php");
 				 }
 			},
 			error: function (request, error) {
