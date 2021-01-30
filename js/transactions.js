@@ -7,8 +7,8 @@ $(document).ready(function(){
 		container: container,
 		todayHighlight: true,
 		autoclose: true,
-		endDate: new Date(new Date().setDate(new Date().getDate() - 6570)),
-		startDate: new Date(new Date().setDate(new Date().getDate() - 21900)),
+		//endDate: new Date(new Date().setDate(new Date().getDate() - 6570)),
+		//startDate: new Date(new Date().setDate(new Date().getDate() - 21900)),
 	})
 	
 	$.ajax(
@@ -17,20 +17,18 @@ $(document).ready(function(){
 		type: 'get',
         dataType: 'JSON',
         success: function(response){
-			if(response.length == 2){
-				document.getElementById("budgetamount").innerHTML = response[0];
-				document.getElementById("totalamount").innerHTML = response[1] ;
+			
+			
 				
 	
-		$("#budgetamount").css("background-color", "green");
+		
 	
-			
-			}else{
+		
 				
 			availableBudgetColorchange(response);
 	
 			RefreshTable(response);
-			}
+			
 			
 			},		
 		error: function (request, error) {
@@ -242,7 +240,7 @@ function RefreshTable(response)
 
 	
 	   
-			for(var i=0; i<len; i++)
+			for(var i=1; i<len; i++)
 			{
                 var id = response[i].id;
                  var name = response[i].name;
@@ -287,8 +285,8 @@ function hidebuttonFunction()
 
 function availableBudgetColorchange(response){
 
-	var availableAmount = response[0].budgetAvailableAmount;
-	var fullAmount= response[0].budgetAmount;
+	var availableAmount = response[1].budgetAvailableAmount;
+	var fullAmount= response[1].budgetAmount;
 	document.getElementById("budgetamount").innerHTML = availableAmount;
 	document.getElementById("totalamount").innerHTML = fullAmount;
 	var percentage = (availableAmount/fullAmount)*100;

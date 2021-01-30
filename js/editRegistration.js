@@ -193,7 +193,8 @@ for (i = 0; i < array.length; i++) {
                   url: 'BusinessLayer/registrationBL.php?function=deleteFunc',
                   type: 'post',
                    
-                   
+                
+  
                   //  cache: false,
                   //  processData: false,
                   //  contentType: false,

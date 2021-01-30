@@ -104,9 +104,19 @@ VALUES ( '$namedb' ,$amountdb,'$categorydb','$datedb','".$_SESSION['id']."','$da
   function ReadTransactions()
   {
         global $conn;
-        $return_arr = Array();
+        //$return_arr = Array();
         $date = date("Y/m");
-        
+        $return_arr[]=array("id" => 0,
+                                "name" => '',
+                                "Amount" => '',
+                                "category" => '',
+                               "Date" => '',
+                                "created_by" => '',
+                                "created_on" => '',
+                                "budgetAmount"=>  '',
+                            "budgetAvailableAmount" => '',
+                                "updated_by" =>  '',
+                                "updated_on" =>  '');
 
 
         $sql3= "SELECT * FROM budget where created_by = '".$_SESSION['id']."' and created_on like  '$date%'
@@ -120,23 +130,31 @@ VALUES ( '$namedb' ,$amountdb,'$categorydb','$datedb','".$_SESSION['id']."','$da
                   
                   }
 
-     $sql = "SELECT * FROM transactions where created_by = '".$_SESSION['id']."'and created_on like  '$date%'
-     ORDER BY id DESC;";
+      $sql = "SELECT * FROM transactions where created_by = '".$_SESSION['id']."'and created_on like  '$date%'
+      ORDER BY id DESC;";
 
 
-     $result = $conn->query($sql);
+  $result = $conn->query($sql);
+   
+  // if ($conn->query( $sql) === TRUE) {
+  //   // echo "New record created successfully";
+  //   //echo json_encode(ReadTransactions());
+  //   } else {
+  //   echo "Error: " . $sql . "<br>" . $conn->error;
+  //   }
 
     
-     if($result->num_rows == 0){
+//      if($result->num_rows == 0){
 
- $return = array($budgetAmount,$budgetAvailableAmount );
-return $return;
+//  $return = array($budgetAmount,$budgetAvailableAmount );
+// return $return;
 
-      }  else{ 
+
+      
       
 
             while($row = mysqli_fetch_array($result) ){
-
+            
                 $id = $row['id'];
                 $name = $row['Name'];
                 $amount = $row['amount'];
@@ -169,7 +187,7 @@ return $return;
           
                return $return_arr;
           }
-      }
+      
 
       function updateAvailableamount()
 {

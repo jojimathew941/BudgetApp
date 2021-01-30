@@ -67,11 +67,14 @@ session_start();
         success: function(response){
      
             window.location.replace("index.php");
-            $.Toast(response, {'duration': 3000, 'class': 'success', 'position':'top','align':'center'});;
-            function preventBack(){window.history.forward();}
-    setTimeout("preventBack()", 0);
-    window.onunload=function(){null};
- 
+            //$.Toast(response, {'duration': 3000, 'class': 'success', 'position':'top','align':'center'});;
+            function preventBack() { 
+            window.history.forward();  
+        } 
+          
+        setTimeout("preventBack()", 0); 
+          
+        window.onunload = function () { null }; 
 			},		
 		error: function (request, error) {
 			console.log(arguments);
